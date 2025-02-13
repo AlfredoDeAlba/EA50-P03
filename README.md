@@ -46,14 +46,14 @@ INSERT INTO prestamos (id_libro, id_usuario, fecha_prestamo, fecha_devolucion) V
 
 -- Obtener todos los libros prestados actualmente:
 
-SELECT libros.id_libro AS id_libro, libros.titulo AS titulo
+SELECT libros.id_libro, libros.titulo AS titulo
 FROM libros
 JOIN prestamos ON libros.id_libro = prestamos.id_libro;
 
 
 -- Listar los usuarios que han prestado libros en el último mes:
 
-SELECT usuarios.id_usuario, usuarios.nombre, email FROM usuarios
+SELECT usuarios.id_usuario, nombre, email FROM usuarios
 JOIN prestamos ON usuarios.id_usuario=prestamos.id_usuario
 WHERE fecha_prestamo >=CURRENT_DATE - INTERVAL '1 month';
 
@@ -67,7 +67,7 @@ WHERE id_libro IN (
 );
 -- Contar el número de préstamos por usuario:
 
-SELECT usuarios.id_usuario, usuarios.nombre, COUNT(prestamos.id_prestamo) AS veces_prestado
+SELECT usuarios.id_usuario, nombre, COUNT(prestamos.id_prestamo)
 FROM usuarios
 JOIN prestamos ON usuarios.id_usuario = prestamos.id_usuario
 GROUP BY usuarios.id_usuario;
